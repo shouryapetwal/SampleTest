@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+#include<graphics.h>
+
+int roundoff(float a)
+{
+	return(a<0?a-0.5:a+0.5);
+}
+
+int main()
+{
+	int gd=DETECT, gm;
+	float x1, x2, y1, y2, steps, dx, dy, xinc, yinc;
+	printf("Enter the starting and ending co-ordinates of the line\n");
+	scanf("%f %f  %f  %f", &x1, &y1, &x2, &y2);
+	initgraph(&gd, &gm, NULL);
+	dx=x2-x1;
+	dy=y2-y1;
+	fabs(dx);
+	fabs(dy);
+	if(fabs(dx)>fabs(dy))
+	{
+		steps=fabs(dx);
+	}
+	else
+	{
+		steps=fabs(dy);
+	}
+	xinc=dx/steps;
+	yinc=dy/steps;
+	putpixel(x1, y1, RED);
+	for(int i=0; i<steps; i++)
+	{
+		x1=x1+xinc;
+		y1=y1+yinc;
+		putpixel(roundoff(x1), roundoff(y1), (i+1)/10);
+		delay(50);
+	}
+	getch();
+	closegraph();
+	return 0;
+
+}
