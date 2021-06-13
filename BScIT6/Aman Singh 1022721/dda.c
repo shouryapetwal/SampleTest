@@ -1,35 +1,42 @@
-#include<stdio.h>
-#include<graphics.h>
-#include<math.h>
-
-void DDA(int X0, int Y0, int X1, int Y1)
+#include <graphics.h>
+#include <stdio.h>
+#include <math.h>
+ 
+void main( )
 {
-    int dx = X1 - X0;
-    int dy = Y1 - Y0;
+float x,y,x1,y1,x2,y2,dx,dy,step;
+int i,gd=DETECT,gm;
  
-    int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
+initgraph(&gd,&gm,Null);
  
-    float Xinc = dx / (float) steps;
-    float Yinc = dy / (float) steps;
+printf("Enter the value of x1 and y1 : ");
+scanf("%f%f",&x1,&y1);
+printf("Enter the value of x2 and y2: ");
+scanf("%f%f",&x2,&y2);
  
-    float X = X0;
-    float Y = Y0;
-    for (int i = 0; i <= steps; i++)
-    {
-        putpixel (round(X),round(Y),RED);  
-        X += Xinc;           
-        Y += Yinc;        
-        delay(100);          
-                             
-    }
+dx=abs(x2-x1);
+dy=abs(y2-y1);
+ 
+if(dx>=dy)
+step=dx;
+else
+step=dy;
+ 
+dx=dx/step;
+dy=dy/step;
+ 
+x=x1;
+y=y1;
+ 
+i=1;
+while(i<=step)
+{
+putpixel(x,y,5);
+x=x+dx;
+y=y+dy;
+i=i+1;
+delay(100);
 }
  
-int main()
-{
-    int gd = DETECT, gm;
- 
-    initgraph (&gd, &gm, Null);  
- 
-    DDA(100, 200, 400, 600);
-    return 0;
+closegraph();
 }
